@@ -1,6 +1,4 @@
 import discord
-from discord.ext import tasks
-from mcstatus import JavaServer
 import os
 from dotenv import load_dotenv
 
@@ -24,15 +22,6 @@ intents.messages = True
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-# サーバーステータスチェック
-def check_server(ip, port):
-    try:
-        server = JavaServer.lookup(f"{ip}:{port}")
-        server.status()
-        return "Online"
-    except:
-        return "Offline"
-
 # チャンネル名更新関数
 async def update_channel(status, channel_id, name_prefix):
     channel = client.get_channel(channel_id)
@@ -42,19 +31,10 @@ async def update_channel(status, channel_id, name_prefix):
         else:
             await channel.edit(name=f"🔴┃{name_prefix}")
 
-# 定期更新タスク
-@tasks.loop(minutes=5)
-async def update_channel_names():
-    vanilla_status = check_server(VANILLA_IP, VANILLA_PORT)
-    forge_status = check_server(FORGE_IP, FORGE_PORT)
-    await update_channel(vanilla_status, VANILLA_CHANNEL_ID, "paper")
-    await update_channel(forge_status, FORGE_CHANNEL_ID, "forge")
-
 # ボット起動時
 @client.event
 async def on_ready():
     print(f"Logged in as {client.user}")
-    update_channel_names.start()
 
 # メッセージ監視
 @client.event
