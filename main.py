@@ -13,8 +13,8 @@ VANILLA_IP = "your_vanilla_server_ip"      # 例: "192.168.1.100"
 VANILLA_PORT = 25565
 FORGE_IP = "your_forge_server_ip"          # 例: "192.168.1.101"
 FORGE_PORT = 25565
-VANILLA_CHANNEL_ID = 123456789012345678    # バニラ鯖用チャンネルID（DiscordSRVが送信）
-FORGE_CHANNEL_ID = 987654321098765432      # Forge鯖用チャンネルID（DiscordIntegrationが送信）
+VANILLA_CHANNEL_ID = 1346129785830772756    # バニラ鯖用チャンネルID（DiscordSRVが送信）
+FORGE_CHANNEL_ID = 1346129946304577619      # Forge鯖用チャンネルID（DiscordIntegrationが送信）
 
 # Discord設定
 intents = discord.Intents.default()
